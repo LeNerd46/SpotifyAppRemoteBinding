@@ -3,7 +3,7 @@
 [![NuGet](https://img.shields.io/nuget/v/SpotifyAppRemoteBinding.svg?style=flat-square)](https://www.nuget.org/packages/SpotifyAppRemoteBinding/)
 
 # How To Use
-Add the .dll file to your project, or install from NuGet. This is just a binding for the official SDK, so only the properties throwing errors were changed. 
+Add the .dll file to your project, or install from NuGet. This is just a binding for the official SDK, so only the properties throwing errors were changed. You also need to install [Gson](https://www.nuget.org/packages/GoogleGson) 
 
 # Set Up
 In order to use the player, you must first authenticate. Authenticating is simple, in your `MainActivity.cs` create a new override
@@ -15,6 +15,7 @@ public class MainActivity : MauiAppCompatActivity
     {
         base.OnCreate(savedInstanceState);
 
+        SpotifyAppRemote remote; // REALLY IMPORTANT, DO NOT LEAVE THIS OUT
         ConnectionParams connectionParams = new ConnectionParams.Builder("clientId").SetRedirectUri("http://localhost:5543").ShowAuthView(true).Build();
         SpotifyAppRemote.Connect(this, connectionParams, new ConnectionListener()); // If you're calling this from outside of this function (after the user opens the app), replace `this` with `Platform.CurrentActivity`
     }
